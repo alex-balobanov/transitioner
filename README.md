@@ -1,2 +1,2 @@
-# transitioner
-Custom View Controller transitions
+# Transitioner
+Custom view controller transitions
