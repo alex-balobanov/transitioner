@@ -12,6 +12,7 @@
 		FA8F515D1EB3CB75009856CB /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F515C1EB3CB75009856CB /* Animator.swift */; };
 		FA8F515F1EB3CBC6009856CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F515E1EB3CBC6009856CB /* Extensions.swift */; };
 		FA8F51611EB3CC48009856CB /* SlideAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F51601EB3CC48009856CB /* SlideAnimation.swift */; };
+		FAD37FA81EB53DA000EF3C98 /* CircularRevealAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD37FA71EB53DA000EF3C98 /* CircularRevealAnimation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		FA8F515C1EB3CB75009856CB /* Animator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		FA8F515E1EB3CBC6009856CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FA8F51601EB3CC48009856CB /* SlideAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimation.swift; sourceTree = "<group>"; };
+		FAD37FA71EB53DA000EF3C98 /* CircularRevealAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularRevealAnimation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				FA8F515C1EB3CB75009856CB /* Animator.swift */,
 				FA8F515E1EB3CBC6009856CB /* Extensions.swift */,
 				FA8F51601EB3CC48009856CB /* SlideAnimation.swift */,
+				FAD37FA71EB53DA000EF3C98 /* CircularRevealAnimation.swift */,
 				FA7DD8F51EAFD9FB000A3143 /* Info.plist */,
 				FA7DD8FC1EAFDB5F000A3143 /* README.md */,
 				FA7DD8FD1EAFDB5F000A3143 /* AutoLayout.podspec */,
@@ -152,6 +155,7 @@
 				FA8F515D1EB3CB75009856CB /* Animator.swift in Sources */,
 				FA8F515F1EB3CBC6009856CB /* Extensions.swift in Sources */,
 				FA7DD9081EB2940B000A3143 /* Transitioner.swift in Sources */,
+				FAD37FA81EB53DA000EF3C98 /* CircularRevealAnimation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,7 @@ public protocol TransitionerAnimatorProtocol: UIViewControllerAnimatedTransition
 	func percentComplete(presentation: Bool, using recognizer: UIPanGestureRecognizer) -> CGFloat
 }
 
-public class TransitionerAnimator: NSObject, TransitionerAnimatorProtocol {
+open class TransitionerAnimator: NSObject, TransitionerAnimatorProtocol {
 	private let isPresentation: Bool
 	
 	// MARK: TransitionerAnimatorProtocol
@@ -23,10 +23,10 @@ public class TransitionerAnimator: NSObject, TransitionerAnimatorProtocol {
 		isPresentation = presentation
 	}
 	
-	public func animate(presentation: Bool, using transitionContext: UIViewControllerContextTransitioning) {
+	open func animate(presentation: Bool, using transitionContext: UIViewControllerContextTransitioning) {
 	}
 	
-	public func percentComplete(presentation: Bool, using recognizer: UIPanGestureRecognizer) -> CGFloat {
+	open func percentComplete(presentation: Bool, using recognizer: UIPanGestureRecognizer) -> CGFloat {
 		return 0
 	}
 	
@@ -35,7 +35,7 @@ public class TransitionerAnimator: NSObject, TransitionerAnimatorProtocol {
 	// This is used for percent driven interactive transitions, as well as for
 	// container controllers that have companion animations that might need to
 	// synchronize with the main animation.
-	public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+	open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
 		return 0.35
 	}
 	
