@@ -8,6 +8,7 @@ import UIKit
 public class CircularRevealAnimation: TransitionerAnimator {
 	
 	public weak var sourceView: UIView?
+	public var backgroundColor = Config.backgroundColor
 	
 	override public func animate(presentation: Bool, using transitionContext: UIViewControllerContextTransitioning) {
 		// the final view's rect
@@ -35,32 +36,46 @@ public class CircularRevealAnimation: TransitionerAnimator {
 		let maskRectTo: CGRect
 		let alphaFrom: CGFloat
 		let alphaTo: CGFloat
+		let backgroundColorFrom: UIColor
+		let backgroundColorTo: UIColor
 		let topView: UIView
-		let bottomView: UIView
+		let bottomView: UIView?
 		
 		if presentation {
 			maskRectFrom = sourceMaskRect
 			maskRectTo = destMaskRect
 			alphaFrom = 0.0
 			alphaTo = 1.0
+			backgroundColorFrom = UIColor.clear
+			backgroundColorTo = self.backgroundColor
 			topView = transitionContext.view(forKey: .to)!
-			bottomView = transitionContext.view(forKey: .from)!
+			bottomView = transitionContext.view(forKey: .from)
 		}
 		else {
 			maskRectFrom = destMaskRect
 			maskRectTo = sourceMaskRect
 			alphaFrom = 1.0
 			alphaTo = 0.0
+			backgroundColorFrom = self.backgroundColor
+			backgroundColorTo = UIColor.clear
 			topView = transitionContext.view(forKey: .from)!
-			bottomView = transitionContext.view(forKey: .to)!
+			bottomView = transitionContext.view(forKey: .to)
 		}
 		
+		// semi-transparent background view
+		let backgroundView = UIView()
+		backgroundView.backgroundColor = backgroundColorTo
+		backgroundView.frame = finalRect
+		
 		// add views to the container view
-		transitionContext.containerView.addSubview(bottomView)
+		if let bottomView = bottomView {
+			bottomView.frame = finalRect
+			transitionContext.containerView.addSubview(bottomView)
+		}
+		transitionContext.containerView.addSubview(backgroundView)
 		transitionContext.containerView.addSubview(topView)
 		topView.frame = finalRect
 		topView.alpha = alphaTo
-		bottomView.frame = finalRect
 		
 		// set mask layer
 		let maskLayer = CAShapeLayer()
@@ -72,6 +87,7 @@ public class CircularRevealAnimation: TransitionerAnimator {
 		CATransaction.begin()
 		CATransaction.setCompletionBlock({
 			topView.layer.mask = nil
+			backgroundView.removeFromSuperview()
 			let cancelled = transitionContext.transitionWasCancelled
 			if cancelled {
 				topView.alpha = alphaFrom
@@ -92,6 +108,14 @@ public class CircularRevealAnimation: TransitionerAnimator {
 		changeOpacity.fromValue = alphaFrom
 		changeOpacity.toValue = alphaTo
 		topView.layer.add(changeOpacity, forKey: "changeOpacity")
+		
+		// background view color animation
+		let changeBackgroundColor = CABasicAnimation(keyPath: "backgroundColor")
+		changeBackgroundColor.duration = duration
+		changeBackgroundColor.fromValue = backgroundColorFrom.cgColor
+		changeBackgroundColor.toValue = backgroundColorTo.cgColor
+		backgroundView.layer.add(changeBackgroundColor, forKey: "changeBackgroundColor")
+		
 		CATransaction.commit()
 	}
 	
@@ -99,7 +123,7 @@ public class CircularRevealAnimation: TransitionerAnimator {
 		// calculate completion percentage using tap gesture recognizer
 		let translation = recognizer.translation(in: recognizer.view)
 		let size = recognizer.view!.bounds.size
-		return CGFloat(hypotf(fabs(Float(translation.x)), fabs(Float(translation.y)))) / (min(size.width, size.height) / 2)
+		return CGFloat(hypotf(fabs(Float(translation.x)), fabs(Float(translation.y)))) / min(size.width, size.height)
 	}
 	
 }

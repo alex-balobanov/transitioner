@@ -12,7 +12,7 @@ public class SlideAnimation: TransitionerAnimator {
 	}
 	
 	public var direction = Direction.bottomToTop
-	public var backgroundColor = UIColor.black.withAlphaComponent(0.7)
+	public var backgroundColor = Config.backgroundColor
 	
 	override public func animate(presentation: Bool, using transitionContext: UIViewControllerContextTransitioning) {
 		// offscreen/onscreen rects
@@ -36,16 +36,18 @@ public class SlideAnimation: TransitionerAnimator {
 		
 		// from/to views
 		let topView = transitionContext.view(forKey: presentation ? .to : .from)!
-		let bottomView = transitionContext.view(forKey: presentation ? .from : .to)!
+		let bottomView = transitionContext.view(forKey: presentation ? .from : .to)
 		
 		// add views to the container view
-		transitionContext.containerView.addSubview(bottomView)
+		if let bottomView = bottomView {
+			bottomView.frame = onScreenRect
+			transitionContext.containerView.addSubview(bottomView)
+		}
 		transitionContext.containerView.addSubview(backgroundView)
 		transitionContext.containerView.addSubview(topView)
+		topView.frame = presentation ? offScreenRect : onScreenRect
 		
 		// animation
-		bottomView.frame = onScreenRect
-		topView.frame = presentation ? offScreenRect : onScreenRect
 		UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
 			topView.frame = presentation ? onScreenRect : offScreenRect
 			backgroundView.backgroundColor = presentation ? self.backgroundColor : UIColor.clear
