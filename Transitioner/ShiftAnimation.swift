@@ -1,56 +1,55 @@
 //
-//  Created by Alex Balobanov on 4/28/17.
+//  Created by Alex Balobanov on 6/5/17.
 //  Copyright © 2017 ITlekt Corporation. All rights reserved.
 //
 
 import UIKit
 
-public class SlideAnimation: TransitionerAnimator {
-	
+public class ShiftAnimation: TransitionerAnimator {
+
 	public enum Direction {
 		case bottomToTop, topToBottom, leftToRight, rightToLeft
 	}
 	
 	public var direction = Direction.bottomToTop
-	public var backgroundColor = Config.backgroundColor
 	
 	override public func animate(presentation: Bool, using transitionContext: UIViewControllerContextTransitioning) {
 		// offscreen/onscreen rects
 		let onScreenRect = transitionContext.finalFrame(for: transitionContext.viewController(forKey: .to)!)
-		var offScreenRect = onScreenRect
+		var offScreenRectForTopView = onScreenRect
+		var offScreenRectForBottomView = onScreenRect
 		switch direction {
 		case .bottomToTop:
-			offScreenRect.origin.y += onScreenRect.height
+			offScreenRectForTopView.origin.y += onScreenRect.height
+			offScreenRectForBottomView.origin.y -= onScreenRect.height
 		case .topToBottom:
-			offScreenRect.origin.y -= onScreenRect.size.height
+			offScreenRectForTopView.origin.y -= onScreenRect.size.height
+			offScreenRectForBottomView.origin.y += onScreenRect.size.height
 		case .leftToRight:
-			offScreenRect.origin.x -= onScreenRect.size.width
+			offScreenRectForTopView.origin.x -= onScreenRect.size.width
+			offScreenRectForBottomView.origin.x += onScreenRect.size.width
 		case .rightToLeft:
-			offScreenRect.origin.x += onScreenRect.size.width
+			offScreenRectForTopView.origin.x += onScreenRect.size.width
+			offScreenRectForBottomView.origin.x -= onScreenRect.size.width
 		}
-		
-		// semi-transparent background view
-		let backgroundView = UIView()
-		backgroundView.backgroundColor = presentation ? UIColor.clear : backgroundColor
-		backgroundView.frame = onScreenRect
 		
 		// from/to views
 		let topView = transitionContext.view(forKey: presentation ? .to : .from)!
 		let bottomView = transitionContext.view(forKey: presentation ? .from : .to)!
 		
 		// add views to the container view
-		transitionContext.containerView.addSubview(bottomView)
-		transitionContext.containerView.addSubview(backgroundView)
 		transitionContext.containerView.addSubview(topView)
-		topView.frame = presentation ? offScreenRect : onScreenRect
-		bottomView.frame = onScreenRect
+		transitionContext.containerView.addSubview(bottomView)
+		
+		// set initial frames
+		topView.frame = presentation ? offScreenRectForTopView : onScreenRect
+		bottomView.frame = presentation ? onScreenRect : offScreenRectForBottomView
 		
 		// animation
 		UIView.animate(withDuration: transitionDuration(using: transitionContext), animations: {
-			topView.frame = presentation ? onScreenRect : offScreenRect
-			backgroundView.backgroundColor = presentation ? self.backgroundColor : UIColor.clear
+			topView.frame = presentation ? onScreenRect : offScreenRectForTopView
+			bottomView.frame = presentation ? offScreenRectForBottomView : onScreenRect
 		}, completion: { finished in
-			backgroundView.removeFromSuperview()
 			transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
 		})
 		
@@ -69,5 +68,5 @@ public class SlideAnimation: TransitionerAnimator {
 		}
 		return fraction
 	}
-	
+
 }

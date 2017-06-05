@@ -39,7 +39,6 @@ public class CircularRevealAnimation: TransitionerAnimator {
 		let backgroundColorFrom: UIColor
 		let backgroundColorTo: UIColor
 		let topView: UIView
-		let bottomView: UIView?
 		
 		if presentation {
 			maskRectFrom = sourceMaskRect
@@ -49,7 +48,6 @@ public class CircularRevealAnimation: TransitionerAnimator {
 			backgroundColorFrom = UIColor.clear
 			backgroundColorTo = self.backgroundColor
 			topView = transitionContext.view(forKey: .to)!
-			bottomView = transitionContext.view(forKey: .from)
 		}
 		else {
 			maskRectFrom = destMaskRect
@@ -59,7 +57,6 @@ public class CircularRevealAnimation: TransitionerAnimator {
 			backgroundColorFrom = self.backgroundColor
 			backgroundColorTo = UIColor.clear
 			topView = transitionContext.view(forKey: .from)!
-			bottomView = transitionContext.view(forKey: .to)
 		}
 		
 		// semi-transparent background view
@@ -68,10 +65,6 @@ public class CircularRevealAnimation: TransitionerAnimator {
 		backgroundView.frame = finalRect
 		
 		// add views to the container view
-		if let bottomView = bottomView {
-			bottomView.frame = finalRect
-			transitionContext.containerView.addSubview(bottomView)
-		}
 		transitionContext.containerView.addSubview(backgroundView)
 		transitionContext.containerView.addSubview(topView)
 		topView.frame = finalRect

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA42D4C21EB79FF2002B8892 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA42D4C11EB79FF2002B8892 /* Config.swift */; };
+		FA5673EF1EE5D0F0002E9BC2 /* ShiftAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5673EE1EE5D0F0002E9BC2 /* ShiftAnimation.swift */; };
 		FA7DD8F61EAFD9FB000A3143 /* Transitioner.h in Headers */ = {isa = PBXBuildFile; fileRef = FA7DD8F41EAFD9FB000A3143 /* Transitioner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FA7DD9081EB2940B000A3143 /* Transitioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7DD9071EB2940B000A3143 /* Transitioner.swift */; };
 		FA8F515D1EB3CB75009856CB /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F515C1EB3CB75009856CB /* Animator.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		FA42D4C11EB79FF2002B8892 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		FA5673EE1EE5D0F0002E9BC2 /* ShiftAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShiftAnimation.swift; sourceTree = "<group>"; };
 		FA7DD8F11EAFD9FB000A3143 /* Transitioner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Transitioner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7DD8F41EAFD9FB000A3143 /* Transitioner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Transitioner.h; sourceTree = "<group>"; };
 		FA7DD8F51EAFD9FB000A3143 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				FA8F515C1EB3CB75009856CB /* Animator.swift */,
 				FA8F515E1EB3CBC6009856CB /* Extensions.swift */,
 				FA8F51601EB3CC48009856CB /* SlideAnimation.swift */,
+				FA5673EE1EE5D0F0002E9BC2 /* ShiftAnimation.swift */,
 				FAD37FA71EB53DA000EF3C98 /* CircularRevealAnimation.swift */,
 				FA7DD8F51EAFD9FB000A3143 /* Info.plist */,
 				FA7DD8FC1EAFDB5F000A3143 /* README.md */,
@@ -157,6 +160,7 @@
 				FA8F51611EB3CC48009856CB /* SlideAnimation.swift in Sources */,
 				FA8F515D1EB3CB75009856CB /* Animator.swift in Sources */,
 				FA8F515F1EB3CBC6009856CB /* Extensions.swift in Sources */,
+				FA5673EF1EE5D0F0002E9BC2 /* ShiftAnimation.swift in Sources */,
 				FA7DD9081EB2940B000A3143 /* Transitioner.swift in Sources */,
 				FAD37FA81EB53DA000EF3C98 /* CircularRevealAnimation.swift in Sources */,
 				FA42D4C21EB79FF2002B8892 /* Config.swift in Sources */,
